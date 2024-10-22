@@ -1,16 +1,24 @@
 // Fonction pour se connecter à l'API et récupérer les données de rabais
 async function fetchDiscounts() {
-    const response = await fetch('https://api.intern.migros.net/discounts?facet_sort=category&facet_sort_order=asc&limit=10&offset=0&order=asc&sort=price&region=gmge&view=browse&custom_image=false&exclude_national=false&special_advertisements=false', {
-        headers: {
-            'accept': 'application/json',
-            'api-version': '8',
-            'accept-language': 'fr',
-            'Authorization': 'Basic ' + btoa('capm:!zvo~9kpH!MluFgl') // Remplace par les identifiants
-        }
-    });
+    try {
+        const response = await fetch('https://api.intern.migros.net/discounts?facet_sort=category&facet_sort_order=asc&limit=10&offset=0&order=asc&sort=price&region=gmge&view=browse&custom_image=false&exclude_national=false&special_advertisements=false', {
+            headers: {
+                'accept': 'application/json',
+                'api-version': '8',
+                'accept-language': 'fr',
+                'Authorization': 'Basic ' + btoa('capm:!zvo~9kpH!MluFgl')  // Remplace avec tes identifiants
+            }
+        });
 
-    const data = await response.json();
-    displayDiscounts(data.discounts);
+        if (!response.ok) {
+            throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        displayDiscounts(data.discounts);
+    } catch (error) {
+        console.error('Erreur lors de la récupération des rabais :', error);
+    }
 }
 
 // Fonction pour afficher les rabais sur la page
