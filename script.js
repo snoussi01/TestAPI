@@ -5,7 +5,7 @@ async function fetchDiscounts() {
             'accept': 'application/json',
             'api-version': '8',
             'accept-language': 'fr',
-            'Authorization': 'Basic ' + btoa('user:password') // Remplace par les identifiants
+            'Authorization': 'Basic ' + btoa('capm:!zvo~9kpH!MluFgl') // Remplace par les identifiants
         }
     });
 
